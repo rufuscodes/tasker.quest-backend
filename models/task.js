@@ -1,5 +1,12 @@
 const mongoose = require('mongoose');
 
+const taskUpdatesSchema = new mongoose.Schema({
+    username: String,
+    header: String,
+    body: String
+}, { timestamps: true });
+
+
 const taskSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -14,10 +21,6 @@ const taskSchema = new mongoose.Schema({
         required: true,
     },
     endDate: {
-        type: Date,
-        required: true,
-    },
-    deadline: {
         type: Date,
         required: true,
     },
@@ -36,6 +39,7 @@ const taskSchema = new mongoose.Schema({
         ref: 'User',
         required: true,
     },
+    taskUpdatesSchema: [taskUpdatesSchema]
 }, { timestamps: true });
 
 const Task = mongoose.model('Task', taskSchema);
