@@ -17,10 +17,11 @@ app.get('/', (req, res) => {
 
 app.use('/posts', require('./controllers/posts'));
 app.use('/users', require('./controllers/users'));
+app.use('/tasks', require('./controllers/tasks'));
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
-    console.log(`Server connected to PORT: ${PORT}`);
+    console.log(`Server connected to PORT: ${ PORT }`);
 });
 
 module.exports = app;

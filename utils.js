@@ -17,7 +17,7 @@ function createRandomUser() {
     let firstName = faker.person.firstName();
     let lastName = faker.person.lastName();
     // split the faker email
-    let email = `${firstName}.${lastName}@${faker.internet.email().split('@')[1]}`
+    let email = `${ firstName }.${ lastName }@${ faker.internet.email().split('@')[1] }`
 
     return {
         firstName: firstName,
@@ -35,6 +35,19 @@ function createRandomUser() {
     }
 }
 
+function createRandomTask() {
+    return {
+        title: faker.lorem.words(),
+        description: faker.lorem.sentence(),
+        startDate: faker.date.future(),
+        endDate: faker.date.future(),
+        deadline: faker.date.future(),
+        priority: faker.arrayElement(['High']),
+        status: faker.arrayElement(['Completed']),
+        user: faker.uuid()
+    };
+}
+
 module.exports = {
-    createRandomUser,
+    createRandomUser, createRandomTask,
 }
