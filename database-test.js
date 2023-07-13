@@ -5,7 +5,7 @@ const { faker } = require('@faker-js/faker');
 const { createRandomUser } = require('./utils');
 
 // import our models
-const { User, Post, Order, Product } = require('./models');
+const { User, Post, Order, Product, Task } = require('./models');
 
 console.log('mongo uri =>', process.env.MONGO_URI);
 // connect to the database
@@ -118,7 +118,7 @@ db.on('error', (err) => {
 //     if (post) {
 //         // find the comment by the id and remove
 //         post.comments.id('6493d5195db1f2b5fe7392b6').deleteOne()
-        
+
 //         post.save()
 //         .then(result => {
 //             console.log('removed comment', result);
@@ -135,27 +135,44 @@ Order.create({
     buyer: 'Issac',
     trackingNumber: '384939xciosd02392',
 })
-.then(order => {
-    console.log('new order', order);
-    // add products to order
-    order.products.push('649747b45845267e021fedce', '649747b45845267e021fedc9');
-    // save the order
-    order.save()
-    .then(updatedOrder => {
-        console.log('order updated', updatedOrder);
-        // print the actual product inside order
-        updatedOrder.populate('products')
-        .then(result => {
-            console.log('order with products', result);
-        })
-        .catch(error => {
-            console.log(error);
-        })
+    .then(order => {
+        console.log('new order', order);
+        // add products to order
+        order.products.push('649747b45845267e021fedce', '649747b45845267e021fedc9');
+        // save the order
+        order.save()
+            .then(updatedOrder => {
+                console.log('order updated', updatedOrder);
+                // print the actual product inside order
+                updatedOrder.populate('products')
+                    .then(result => {
+                        console.log('order with products', result);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            })
+            .catch(error => {
+                console.log(error);
+            })
     })
     .catch(error => {
         console.log(error);
     })
+
+Task.create({
+    title: 'Task Title',
+    description: 'Task Description',
+    startDate: new Date(),
+    endDate: new Date(),
+    deadline: new Date(),
+    priority: 'Medium',
+    status: 'Todo',
+    user: '6489486bda17569df78c0f30', // Replace with the actual user ID
 })
-.catch(error => {
-    console.log(error);
-})
+    .then((task) => {
+        console.log('New task created:', task);
+    })
+    .catch((error) => {
+        console.log('Error creating task:', error);
+    });
