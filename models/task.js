@@ -2,6 +2,14 @@
 
 const mongoose = require('mongoose');
 
+const taskUpdateSchema = new mongoose.Schema({
+    username: String,
+    header: String,
+    body: String
+}, { timestamps: true });
+
+
+
 const taskSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -38,6 +46,8 @@ const taskSchema = new mongoose.Schema({
         ref: 'User',
         required: true,
     },
+    taskUpdateSchema: [taskUpdateSchema]
+
 }, { timestamps: true });
 
 const Task = mongoose.model('Task', taskSchema);
