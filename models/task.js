@@ -1,5 +1,3 @@
-// update branch - task
-
 const mongoose = require('mongoose');
 
 const taskUpdateSchema = new mongoose.Schema({
@@ -7,8 +5,6 @@ const taskUpdateSchema = new mongoose.Schema({
     header: String,
     body: String
 }, { timestamps: true });
-
-
 
 const taskSchema = new mongoose.Schema({
     title: {
@@ -41,13 +37,17 @@ const taskSchema = new mongoose.Schema({
         enum: ['Todo', 'In Progress', 'Completed'],
         default: 'Todo',
     },
+    category: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category',
+        required: true,
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
     },
-    taskUpdateSchema: [taskUpdateSchema]
-
+    updates: [taskUpdateSchema]
 }, { timestamps: true });
 
 const Task = mongoose.model('Task', taskSchema);

@@ -19,11 +19,12 @@ app.use('/posts', require('./controllers/posts'));
 app.use('/users', require('./controllers/users'));
 app.use('/events', require('./controllers/events'));
 app.use('/tasks', require('./controllers/tasks'));
+app.use('/categories', require('./controllers/categories'));
 
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
-    console.log(`Server connected to PORT: ${ PORT }`);
+    console.log(`Server connected to PORT: ${PORT}`);
 });
 
 module.exports = app;
