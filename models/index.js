@@ -8,7 +8,6 @@ const Product = require('./product');
 const Order = require('./order');
 const Event = require('./event');
 const Task = require('./task');
-const Category = require('./category');
 
 console.log('mongo uri =>', process.env.MONGO_URI);
 
@@ -38,6 +37,5 @@ module.exports = {
     Order,
     Event,
     Task,
-    Category
 };
 
