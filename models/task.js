@@ -23,10 +23,6 @@ const taskSchema = new mongoose.Schema({
         type: Date,
         required: true,
     },
-    deadline: {
-        type: Date,
-        required: true,
-    },
     priority: {
         type: String,
         enum: ['High', 'Medium', 'Low'],
@@ -38,8 +34,7 @@ const taskSchema = new mongoose.Schema({
         default: 'Todo',
     },
     category: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Category',
+        type: String,
         required: true,
     },
     user: {

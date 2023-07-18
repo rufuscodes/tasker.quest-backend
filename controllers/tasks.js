@@ -38,17 +38,17 @@ router.get('/:id', (req, res) => {
         });
 });
 
-// POST route for creating a new task
+
 router.post('/', (req, res) => {
     const newTask = new Task({
         title: req.body.title,
         description: req.body.description,
         startDate: req.body.startDate,
         endDate: req.body.endDate,
-        deadline: req.body.deadline,
         priority: req.body.priority,
         status: req.body.status,
-        user: req.body.user
+        category: req.body.category,
+        user: req.body.user // Remove .user._id
     });
 
     newTask.save()
@@ -61,6 +61,7 @@ router.post('/', (req, res) => {
             return res.json({ message: 'An error occurred, please try again' });
         });
 });
+
 
 
 // PUT route for updating a task
