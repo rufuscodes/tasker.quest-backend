@@ -2,9 +2,9 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const User = require('../models');
+const { User } = require('../models');
 
-const Task = require('../models/task');
+const { Task } = require('../models');
 
 // GET route for /tasks
 router.get('/', (req, res) => {
@@ -48,7 +48,7 @@ router.post('/', (req, res) => {
         priority: req.body.priority,
         status: req.body.status,
         category: req.body.category,
-        user: req.body.user // Remove .user._id
+        user: req.body.user
     });
 
     newTask.save()
@@ -62,7 +62,22 @@ router.post('/', (req, res) => {
         });
 });
 
+// get all task with a category of 'completed'
+router.get('/', (req, res) => {
 
+    Task.findById(req.params.id)
+        .then(task => {
+            if (task) {
+                return res.json({ task: task });
+            } else {
+                return res.json({ message: 'Task not found' });
+            }
+        })
+        .catch(error => {
+            console.log('error', error);
+            return res.json({ message: 'An error occurred, please try again' });
+        });
+});
 
 // PUT route for updating a task
 router.put('/:id', (req, res) => {
